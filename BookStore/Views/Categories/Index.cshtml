@@ -1,13 +1,23 @@
-﻿<!DOCTYPE html>
+﻿ @model List<Category>
+ @section MainTitle{Categories}
+ @section Title{Main}
+ @section SubTitle{Main}
+@section CardTitle{Library}
+ @section Buttons{
+
+    <a asp-controller="Categories" asp-action="Create" class="btn btn-outline-primary">Create</a>
+ }
+<!DOCTYPE html>
     <html>
     <head>
         <title></title>
     </head>
     <body>
-        @model List<Category>
+       
 
     @if (!Model.Any())
     {
+        <div class="card-body">
         <tr>
             <td colspan="2">
                 <div class="alert alert-info alert-dismissible">
@@ -17,14 +27,19 @@
                 </div>
             </td>
         </tr>
+        </div>
     }
     else
     {
+        <div class="card-body">
+
+        
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th style="width: 10px">#</th>
                     <th>Name</th>
+                    <th>Action</th>
 
                 </tr>
             </thead>
@@ -40,6 +55,14 @@
                         <td>
                             @item.Name
                         </td>
+                        <td>
+                                <a class="btn btn-outline-secondary" asp-controller="Categories" asp-action="Edit" asp-route-id="@item.Id">
+                                Edit
+                            </a>
+                                <a class="btn btn-outline-danger" asp-controller="Categories" asp-action="Delete" asp-route-id="@item.Id">
+                                   Delete
+                                </a>
+                        </td>
                     </tr>
                 }
             
@@ -47,6 +70,7 @@
           
           </tbody>
      </table>
+        </div>
     }
     </body>
     </html>
