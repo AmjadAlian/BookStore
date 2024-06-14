@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Models
 {
+    
+    [Index(nameof(Name),IsUnique = true)]
     public class Category
-    {
+    {  
         public int Id { get; set; }
 
         [MaxLength(30)]
@@ -12,5 +15,7 @@ namespace BookStore.Models
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         public DateTime LastUpdatedDate { get; set; } = DateTime.Now;
+
+        public List <BookCategory> Books { get; set; } = new List <BookCategory> ();
     }
 }

@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.ViewModel
+namespace BookStore.Models
 {
-    public class CategoryVM
-    {
+    [Index(nameof(Name), IsUnique = true)]
+    public class Author {
+        
         public int Id { get; set; }
 
         [MaxLength(30)]

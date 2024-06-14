@@ -1,4 +1,7 @@
-﻿
-.card-header::after{
-    display:none;
+﻿.card-body::after, .card-footer::after, .card-header::after{
+   display:none ;
 }
+.ActionCategory{
+    width:250px;
+}
+
