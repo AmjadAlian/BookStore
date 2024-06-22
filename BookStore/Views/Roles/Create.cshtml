@@ -1,0 +1,41 @@
+﻿@using BookStore.ViewModel
+@model RoleVM
+@section MainTitle {
+    Roles
+}
+@section Title {
+Main
+}
+@section SubTitle {
+Main
+}
+@section CardTitle {
+    Roles
+}
+
+
+
+@section Buttons {
+
+    <a asp-controller="Roles" asp-action="Index" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i> Back </a>
+}
+
+<form asp-controller="Roles">
+    <div class="card-body">
+        <div class="form-group">
+            <label asp-for="Name">Category Name</label>
+            <input type="text" asp-for="Name" class="form-control" placeholder="Enter Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+        </div>
+
+      
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer d-flex justify-content-between align-items-center">
+        <button type="submit" class="btn btn-outline-primary " id="js-item">
+        Create    
+        </button>
+        <a asp-controller="Categories" asp-action="Index" class="btn btn-outline-info"><i class="far fa-window-close"></i> Cancel </a>
+    </div>
+</form>

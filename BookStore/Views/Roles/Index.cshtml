@@ -1,24 +1,21 @@
 ﻿@using BookStore.ViewModel
-@model List<BookVM>
+@model List<RoleVM>
 @section MainTitle {
-Book
+    Roles
 }
 @section Title {
-    @("Home")
+Main
 }
 @section SubTitle {
-    @("Home")
+Main
 }
 @section CardTitle {
-    @("Books")
+    Roles
 }
+
 @section Buttons {
-    @if (User.Identity.IsAuthenticated)
-    {
-        <a asp-controller="Book" asp-action="Create" class="btn btn-outline-primary"><i class="far fa-plus-square"></i> Create</a>
-    }
 
-
+    <a asp-controller="Roles" asp-action="Create" class="btn btn-outline-primary"><i class="far fa-plus-square"></i> Create</a>
 }
 
 
@@ -46,17 +43,8 @@ else
             <thead>
                 <tr>
                     <th style="width: 10px">#</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Publisher</th>
-                    <th>Publisher Date</th>
-                    <th>Image</th>
-                    <th>Categories</th>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        
+                    <th>Name</th>
                     <th class="ActionCategory">Action</th>
-                    }
 
                 </tr>
             </thead>
@@ -66,35 +54,11 @@ else
                 @foreach (var item in @Model)
                 {
                     <tr>
+                       
                         <td>
-                            @item.Id
+                            @item.Name
                         </td>
-                        <td>@item.Title</td>
-                        <td>
-                            @item.Author
-                        </td>
-                        <td>
-                            @item.publisher
-                        </td>
-                        <td>@item.PublishDate</td>
-                        <td><img  src="~/img/books/@item.ImgUrl"  width="50px"/></td>
-                        <td> @string.Join(", ",item.Categories) </td>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            
-                        <td>
-                            <a class="btn btn-outline-secondary btn-sm " asp-controller="Categories" asp-action="Details" asp-route-id="@item.Id">
-                                <i class="fas fa-info-circle"></i> Detials
-                            </a>
-                            <a class="btn btn-outline-info btn-sm" asp-controller="Categories" asp-action="Edit" asp-route-id="@item.Id">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
 
-                            <a class="btn btn-outline-danger btn-sm js-delete" data-id="@item.Id">
-                                <i class="fas fa-trash"></i> Delete
-                            </a>
-                        </td>
-                        }
                     </tr>
                 }
 
@@ -124,7 +88,7 @@ else
                     confirmButtonText: "Yes, delete it!"
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        const response = await fetch(`/Book/Delete/${id}`, { method: "POST" });
+                        const response = await fetch(`/Categories/Delete/${id}`, { method: "POST" });
 
                         if (response.ok) {
 

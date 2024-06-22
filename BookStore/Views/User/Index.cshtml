@@ -1,5 +1,5 @@
 ﻿@using BookStore.ViewModel
-@model List<BookVM>
+@model List<ApplicationUserVM>
 @section MainTitle {
 Book
 }
@@ -10,15 +10,15 @@ Book
     @("Home")
 }
 @section CardTitle {
-    @("Books")
+    @("Users")
 }
 @section Buttons {
     @if (User.Identity.IsAuthenticated)
     {
-        <a asp-controller="Book" asp-action="Create" class="btn btn-outline-primary"><i class="far fa-plus-square"></i> Create</a>
+        <a asp-controller="User" asp-action="Create" class="btn btn-outline-primary"><i class="far fa-plus-square"></i> Create </a>
     }
 
-
+    
 }
 
 
@@ -45,19 +45,15 @@ else
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Publisher</th>
-                    <th>Publisher Date</th>
-                    <th>Image</th>
-                    <th>Categories</th>
+                    <th >Name</th>
+                    <th>Address</th>                 
+                    <th>PhoneNumber</th>
+                    <th>Email</th>
+                    <th>Roles</th>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        
-                    <th class="ActionCategory">Action</th>
+                        <th>Action</th>
                     }
-
                 </tr>
             </thead>
             <tbody>
@@ -66,35 +62,19 @@ else
                 @foreach (var item in @Model)
                 {
                     <tr>
+                       
+                        <td>@item.UserName</td>
                         <td>
-                            @item.Id
-                        </td>
-                        <td>@item.Title</td>
-                        <td>
-                            @item.Author
+                            @item.Address
                         </td>
                         <td>
-                            @item.publisher
+                            @item.PhoneNumber
                         </td>
-                        <td>@item.PublishDate</td>
-                        <td><img  src="~/img/books/@item.ImgUrl"  width="50px"/></td>
-                        <td> @string.Join(", ",item.Categories) </td>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            
-                        <td>
-                            <a class="btn btn-outline-secondary btn-sm " asp-controller="Categories" asp-action="Details" asp-route-id="@item.Id">
-                                <i class="fas fa-info-circle"></i> Detials
-                            </a>
-                            <a class="btn btn-outline-info btn-sm" asp-controller="Categories" asp-action="Edit" asp-route-id="@item.Id">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
+                        <td>@item.Email</td>
+                        <td>@(item.Roles != null ? string.Join(",", item.Roles) : "No Roles")</td>
+                        
 
-                            <a class="btn btn-outline-danger btn-sm js-delete" data-id="@item.Id">
-                                <i class="fas fa-trash"></i> Delete
-                            </a>
-                        </td>
-                        }
+                     
                     </tr>
                 }
 
@@ -124,7 +104,7 @@ else
                     confirmButtonText: "Yes, delete it!"
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        const response = await fetch(`/Book/Delete/${id}`, { method: "POST" });
+                        const response = await fetch(`/User/Delete/${id}`, { method: "POST" });
 
                         if (response.ok) {
 

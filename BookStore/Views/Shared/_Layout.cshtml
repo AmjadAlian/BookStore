@@ -220,11 +220,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </li>
                             </ul>
                         </li>
+                     
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a asp-controller="Roles" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Simple Link
+                                    Roles
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="User" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Users
                                     <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>

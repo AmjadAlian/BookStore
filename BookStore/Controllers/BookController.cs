@@ -1,12 +1,14 @@
 ﻿using BookStore.Data;
 using BookStore.Models;
 using BookStore.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -17,6 +19,7 @@ namespace BookStore.Controllers
             this.context = context;
             this.webHostEnvironment = webHostEnvironment;
         }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var bookVM = context.Books.Include(book => book.Author).Include(book => book.Categories).ThenInclude(book => book.category).ToList().Select(book=> new BookVM
