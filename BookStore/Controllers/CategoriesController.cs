@@ -1,6 +1,8 @@
 ﻿using BookStore.Data;
 using BookStore.Models;
+using BookStore.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BookStore.Controllers
 {
@@ -23,7 +25,7 @@ namespace BookStore.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Category CategoryVM)
+        public IActionResult Create(CategoryVM CategoryVM)
         {
             if (!ModelState.IsValid)
             {
@@ -33,40 +35,87 @@ namespace BookStore.Controllers
             {
                 Name = CategoryVM.Name,
             };
-            context.categories.Add(category);
-            context.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                context.categories.Add(category);
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ModelState.AddModelError("Name","Category Name Already Exists");
+                return View(CategoryVM);
+            }
+           
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            
+            var category = context.categories.Find(id);
 
-            return View("Create");
+            var ViewModel = new CategoryVM
+            {
+                Id = id,
+                Name = category.Name,
+            };
+
+            return View("Create", ViewModel);
 
         }
         [HttpPost]
-        public IActionResult Edit(Category CategoryVM) {
+        public IActionResult Edit(CategoryVM CategoryVM) {
 
-
-            var category = context.categories.Find(CategoryVM.Id);
+            if (!ModelState.IsValid)
+            {
+                return  View("Create", CategoryVM);
+            }
+           
+          var category = context.categories.Find(CategoryVM.Id);
+               
+            if (category is null)
+            {
+                return NotFound();
+            }
             category.Name = CategoryVM.Name;
+            category.LastUpdatedDate = DateTime.Now;
             context.SaveChanges();
-
             return RedirectToAction("Index");
-        
+
+        }
+        public IActionResult Details (int id)
+        {
+            var category = context.categories.Find(id);
+            if (category is null)
+            {
+                return NotFound();
+            }
+            var categoryVM = new CategoryVM
+            {
+                Id = category.Id,
+                Name = category.Name,
+                CreatedDate = category.CreatedDate,
+                LastUpdatedDate = category.LastUpdatedDate,
+
+            };
+
+            return View("Details", categoryVM);
+
         }
 
         public IActionResult Delete(int id)
         {
             var category = context.categories.Find(id);
-
-            context.Remove(category);
+            if(category is null)
+            {
+                return NotFound();
+            }
+            context.categories.Remove(category);
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return Ok();
         }
+       
         
     }
 

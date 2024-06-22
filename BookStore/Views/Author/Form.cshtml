@@ -1,0 +1,44 @@
+﻿@using BookStore.ViewModel
+@model BookStore.ViewModel.AuthorVM
+@section MainTitle {
+Author
+}
+@section Title {
+    @(Model?.Id == null ? "Create" : "Edit")
+}
+@section SubTitle {
+    @(Model?.Id == null ? "Create" : "Edit")
+}
+@section CardTitle {
+    @(Model?.Id == null ? "Create Author" : "Edit Author")
+}
+@section Buttons {
+
+    <a asp-controller="Author" asp-action="Index" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i> Back </a>
+}
+
+<form asp-controller="Author">
+    <div class="card-body">
+        <div class="form-group">
+            <label asp-for="Name">Category Name</label>
+            <input type="text" asp-for="Name" class="form-control" placeholder="Enter Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group mb-0">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
+                <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer d-flex justify-content-between align-items-center">
+        <button type="submit" class="btn btn-outline-primary " >  <i class="fas fa-edit"></i> @(Model?.Id == null ? "Create" : "Update")</button>
+        <a asp-controller="Author" asp-action="Index" class="btn btn-outline-info"><i class="far fa-window-close"></i> Cancel </a>
+    </div>
+</form>
+
+
+

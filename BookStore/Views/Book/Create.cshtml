@@ -1,0 +1,72 @@
+﻿@using BookStore.ViewModel
+@model BookFormVM
+@section MainTitle {
+Book
+}
+@section Title {
+    @(Model?.Id == null ? "Create" : "Edit")
+}
+@section SubTitle {
+    @(Model?.Id == null ? "Create" : "Edit")
+}
+@section CardTitle {
+    @(Model?.Id == null ? "Create Book" : "Edit Book")
+}
+@section Buttons {
+
+    <a asp-controller="Book" asp-action="Index" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i> Back </a>
+}
+
+<form asp-controller="Book" asp-action="Create" enctype="multipart/form-data">
+    <div class="card-body">
+        <div class="form-group">
+            <label asp-for="Title">Book Title</label>
+            <input type="text" asp-for="Title" class="form-control" placeholder="Enter Title">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+      <div class="form-group">
+            <label asp-for="AuthorId">Author</label>
+            <select type="text" asp-for="AuthorId" class="form-control" asp-items="@Model.Authors"></select>
+            <span asp-validation-for="AuthorId" class="text-danger"></span>
+      </div>
+
+        <div class="form-group">
+            <label asp-for="publisher"></label>
+            <input type="text" asp-for="publisher" class="form-control">
+            <span asp-validation-for="publisher" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PublishDate"></label>
+            <input type="date" asp-for="PublishDate" class="form-control">
+            <span asp-validation-for="PublishDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ImgUrl"></label>
+            <input type="file" asp-for="ImgUrl" class="form-control">
+            <span asp-validation-for="ImgUrl" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SelectedCategories"></label>
+            <select type="text" asp-for="SelectedCategories" class="form-control" asp-items="@Model.Categories"></select>
+            <span asp-validation-for="SelectedCategories" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea type="text" asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer d-flex justify-content-between align-items-center">
+        <button type="submit" class="btn btn-outline-primary "> add </button>
+        <a asp-controller="Book" asp-action="Index" class="btn btn-outline-info"><i class="far fa-window-close"></i> Cancel </a>
+    </div>
+</form>
+
+
+

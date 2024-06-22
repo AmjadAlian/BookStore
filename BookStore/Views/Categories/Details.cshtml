@@ -1,0 +1,57 @@
+﻿@using BookStore.ViewModel
+ @model CategoryVM
+@section MainTitle {
+Categories
+}
+@section Title {
+Main
+}
+@section SubTitle {
+Details
+}
+@section CardTitle {
+Category Details
+}
+@section Buttons {
+
+    <a asp-controller="Categories" asp-action="Index" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i> Back </a>
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Name</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+
+                            <td>
+                              @Model.Id
+                            </td>
+                            <td>
+                               @Model.Name
+                            </td>
+                            
+                            <td>
+                               @Model.CreatedDate
+                            </td>
+                            <td> 
+                                @Model.LastUpdatedDate 
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+</body>
+</html>

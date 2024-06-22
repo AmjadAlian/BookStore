@@ -15,6 +15,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="~/dashboard/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/dashboard/dist/css/adminlte.min.css">
+
+    <link rel="stylesheet" href="~/dashboard/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Custome css style -->
     <link rel="stylesheet" href="~/css/main.css">
 </head>
@@ -218,11 +220,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </li>
                             </ul>
                         </li>
+                     
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a asp-controller="Roles" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Simple Link
+                                    Roles
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="User" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Users
                                     <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
@@ -233,6 +245,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Categories
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Author" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Authors
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Book" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Books
                                     <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
@@ -315,7 +345,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="~/dashboard/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/dashboard/plugins/sweetalert2/sweetalert2.min.js"></script>
+
     <!-- AdminLTE App -->
     <script src="~/dashboard/dist/js/adminlte.min.js"></script>
+
+    @RenderSection("Script",false)
 </body>
 </html>
